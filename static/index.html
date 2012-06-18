@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Markov chain walker</title>
+  <style>
+   body {
+    font-family: sans-serif;
+    text-align: center;
+   }
+   textarea {
+    width: 70em;
+    height: 30em;
+   }
+  </style>
+ </head>
+ <body>
+  <form method="post" action="/markov">
+   Select memory size:
+   <select name="mode">
+    <option value="1">1 word</option>
+    <option value="2">2 words</option>
+    <option value="3">3 words</option>
+    <option value="4">4 words</option>
+    <option value="5">5 words</option>
+    <option value="c1">1 character</option>
+    <option value="c2">2 characters</option>
+    <option value="c3">3 characters</option>
+    <option value="c4">4 characters</option>
+    <option value="c5">5 characters</option>
+    <option value="c6">6 characters</option>
+    <option value="c7">7 characters</option>
+    <option value="c8">8 characters</option>
+    <option value="c9">9 characters</option>
+   </select><br>
+   <textarea name="text"></textarea><br>
+   <input type="submit" value="Markov it up">
+  </form>
+ </body>
+</html>
