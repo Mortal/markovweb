@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS+=-Wall -Wextra -I./markov
+CXXFLAGS+=-Wall -Wextra -I./markov -std=gnu++0x
 LDFLAGS+=-lPocoNet -lPocoFoundation
 all: web
 
