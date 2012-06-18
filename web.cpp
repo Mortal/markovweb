@@ -117,6 +117,8 @@ private:
 };
 
 struct MarkovRequestHandler : public HTTPRequestHandler {
+    MarkovRequestHandler(std::mt19937 & rng) : rng(rng) {}
+
     virtual void handleRequest(HTTPServerRequest & request, HTTPServerResponse & response) {
 	std::istream & body = request.stream();
 	markov_streambuf filterbuf(body.rdbuf());
@@ -152,7 +154,7 @@ struct MarkovRequestHandler : public HTTPRequestHandler {
 	}
 	std::istream filterbody(&filterbuf);
 	response.setContentType("text/plain");
-	markov(filterbody, response.send(), mode, 1000);
+	markov(filterbody, response.send(), mode, 1000, rng);
     }
 
 private:
@@ -160,14 +162,18 @@ private:
 	response.setStatus(HTTPResponse::HTTP_BAD_REQUEST);
 	response.send() << "Bad request\n" << error << std::endl;
     }
+
+    std::mt19937 & rng;
 };
 
 struct rqhdlfact : public HTTPRequestHandlerFactory {
     virtual HTTPRequestHandler * createRequestHandler(const HTTPServerRequest & request) {
 	const std::string & url = request.getURI();
-	if (url == "/markov") return new MarkovRequestHandler();
+	if (url == "/markov") return new MarkovRequestHandler(rng);
 	return new FileRequestHandler();
     }
+
+    std::mt19937 rng;
 };
 
 void goserve() {
