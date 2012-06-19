@@ -4,18 +4,58 @@
   <meta charset="utf-8">
   <title>Markov chain walker</title>
   <style>
+   html, body {
+    height: 100%;
+    margin: 0;
+   }
+   form {
+    position: absolute;
+    top: 0;
+    left: 1em;
+    right: 1em;
+    bottom: 50%;
+   }
    body {
     font-family: sans-serif;
     text-align: center;
    }
    textarea {
-    width: 70em;
-    height: 30em;
+    position: absolute;
+    top: 10%;
+    height: 90%;
+    left: 0;
+    width: 100%;
+    border: 0 none;
+    outline: 1px solid gray;
+    margin: 0;
+    padding: 0;
+   }
+   iframe {
+    position: absolute;
+    top: 55%;
+    width: 100%;
+    height: 45%;
+    left: 0;
+    border: 0 none;
+   }
+   @media screen and (min-width: 1300px) {
+    iframe {
+     top: 0;
+     height: 100%;
+     left: 55%;
+     width: 45%;
+    }
+    form {
+     top: 0;
+     left: 1em;
+     right: 50%;
+     height: 100%;
+    }
    }
   </style>
  </head>
  <body>
-  <form method="post" action="/markov">
+  <form method="post" action="/markov" target="output">
    Select memory size:
    <select name="mode">
     <option value="1">1 word</option>
@@ -32,9 +72,10 @@
     <option value="c7">7 characters</option>
     <option value="c8">8 characters</option>
     <option value="c9">9 characters</option>
-   </select><br>
-   <textarea name="text"></textarea><br>
+   </select>
    <input type="submit" value="Markov it up">
+   <textarea name="text"></textarea>
   </form>
+  <iframe name="output"></iframe>
  </body>
 </html>
